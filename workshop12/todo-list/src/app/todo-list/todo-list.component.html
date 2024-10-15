@@ -1,0 +1,18 @@
+<div>
+  <div class="todo-cont">
+    <label for="todo-input">To-Do:</label>
+    <input type="text" name="todo-input" id="todo-input" [(ngModel)]="name" />
+    <input type="button" value="save" (click)="saveToDo()" />
+  </div>
+
+  <div class="todos-cont">
+    <ol>
+      @if (todos.length>0){
+      <li *ngFor="let todo of todos">
+        <span>{{ todo }}</span>
+        <button (click)="deleteTodo(todo)">x</button>
+      </li>
+      }
+    </ol>
+  </div>
+</div>
