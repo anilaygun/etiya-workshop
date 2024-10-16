@@ -1,16 +1,29 @@
-<div>
+<div class="main">
   <div class="todo-cont">
-    <label for="todo-input">To-Do:</label>
+    <label for="todo-input">To-Do: </label>
     <input type="text" name="todo-input" id="todo-input" [(ngModel)]="name" />
-    <input type="button" value="save" (click)="saveToDo()" />
+    <input class="save-btn" type="button" value="Save" (click)="saveToDo()" />
+    <button (click)="addTodo()">Add</button>
+    <button (click)="deleteTodoWithId(1)">Delete</button>
+    <button (click)="getById()">Get Detail</button>
   </div>
 
   <div class="todos-cont">
     <ol>
-      @if (todos.length>0){
-      <li *ngFor="let todo of todos">
-        <span>{{ todo }}</span>
-        <button (click)="deleteTodo(todo)">x</button>
+      @if(todos.length > 0){
+      <!-- @for (todo of todos; track todo) {
+          <li>
+            <span>{{ todo }}</span>
+            <button (click)="deleteTodo(todo)">x</button>
+          </li>
+        }  -->
+
+      <li *ngFor="let todo of toDoListFromBackend">
+        <app-todo-cart
+          [toDoFromOtherPage]="todo.title"
+          (onRemoveClick)="deleteTodo($event)"
+        />
+        <button (click)="updateTodo(todo)">Update Todo</button>
       </li>
       }
     </ol>
